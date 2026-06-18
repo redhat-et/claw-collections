@@ -13,6 +13,7 @@ assistants from a Git repo.
 | `hr-specialist` | HR policy, communications, onboarding | Onboarding checklist generator |
 | `financial-analyst` | Financial analysis, modeling, reporting | Budget variance analysis |
 | `executive-assistant` | Meeting prep, exec comms, strategic docs | Executive brief summarizer |
+| `marketing-specialist` | Campaigns, content, messaging, performance | Campaign brief, content calendar |
 
 ## Deployment
 
@@ -77,6 +78,28 @@ spec:
       url: https://github.com/redhat-et/claw-collections.git
       ref: main
       path: enterprise-profiles/executive-assistant
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: shared-anthropic
+          key: api-key
+```
+
+### Marketing Specialist
+
+```yaml
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: marketing-assistant
+  namespace: ai-marketing
+spec:
+  agentFiles:
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/marketing-specialist
   credentials:
     - name: anthropic
       provider: anthropic
