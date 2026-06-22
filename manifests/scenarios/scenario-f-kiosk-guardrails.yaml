@@ -34,7 +34,7 @@ spec:
     applyPolicy: Always
     git:
       url: https://github.com/redhat-et/claw-collections.git
-      ref: main
+      ref: v1.0.0
       path: enterprise-profiles/financial-analyst
     readOnly:
       - SOUL.md
