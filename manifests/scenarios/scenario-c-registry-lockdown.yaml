@@ -1,0 +1,44 @@
+# Scenario C: Locked-down enterprise with registry control
+#
+# Per-user instance with blocked public registries and an
+# internal npm mirror. Each user gets their own API key for
+# cost attribution.
+#
+# See the full walkthrough:
+# https://github.com/redhat-et/claw-project/blob/main/docs/scenarios/scenario-c-registry-lockdown.md
+#
+# Prerequisites (manual deploy):
+#   oc new-project ai-users
+#   oc create secret generic jane-anthropic-key \
+#     --from-literal=api-key='sk-ant-...' -n ai-users
+#   oc apply -f scenario-c-registry-lockdown.yaml -n ai-users
+#
+# Prerequisites (GitOps via ArgoCD):
+#   Push this file to manifests/<your-directory>/ in
+#   claw-collections and create the secret in the
+#   <directory>-claw namespace. See docs/gitops-setup.md.
+---
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: jane-doe
+spec:
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: jane-anthropic-key
+          key: api-key
+    - name: internal-npm
+      type: none
+      domain: npm.corp.internal
+  network:
+    builtinPassthroughs:
+      - github.com
+      - codeload.github.com
+  agentFiles:
+    applyPolicy: IfMissing
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/standard-user
