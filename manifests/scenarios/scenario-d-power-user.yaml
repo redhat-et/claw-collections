@@ -1,0 +1,32 @@
+# Scenario D: Power user with full control
+#
+# A single developer or ML engineer who configures everything
+# through the OpenClaw UI. The operator provides infrastructure
+# only (gateway, proxy, credentials). No agentFiles, no readOnly,
+# no operator-imposed persona.
+#
+# See the full walkthrough:
+# https://github.com/redhat-et/claw-project/blob/main/docs/scenarios/scenario-a-shared-team.md#power-user-variation-scenario-d
+#
+# Prerequisites (manual deploy):
+#   oc new-project ai-dev
+#   oc create secret generic personal-anthropic \
+#     --from-literal=api-key='sk-ant-...' -n ai-dev
+#   oc apply -f scenario-d-power-user.yaml -n ai-dev
+#
+# Prerequisites (GitOps via ArgoCD):
+#   Push this file to manifests/<your-directory>/ in
+#   claw-collections and create the secret in the
+#   <directory>-claw namespace. See docs/gitops-setup.md.
+---
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: power-user
+spec:
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: personal-anthropic
+          key: api-key
