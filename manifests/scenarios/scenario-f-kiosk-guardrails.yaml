@@ -1,0 +1,52 @@
+# Scenario F: Locked-down kiosk with guardrails
+#
+# Fully locked-down financial analyst assistant for regulated
+# environments. Five defense layers: network blocking, config
+# overwrite, read-only persona, read-only skills, and plugin
+# restriction.
+#
+# See the full walkthrough:
+# https://github.com/redhat-et/claw-project/blob/main/docs/scenarios/scenario-f-kiosk-guardrails.md
+#
+# Prerequisites (manual deploy):
+#   oc new-project ai-finance
+#   oc create secret generic finance-anthropic \
+#     --from-literal=api-key='sk-ant-...' -n ai-finance
+#   oc apply -f scenario-f-kiosk-guardrails.yaml -n ai-finance
+#
+# Prerequisites (GitOps via ArgoCD):
+#   Push this file to manifests/<your-directory>/ in
+#   claw-collections and create the secret in the
+#   <directory>-claw namespace. See docs/gitops-setup.md.
+---
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: finance-analyst
+spec:
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: finance-anthropic
+          key: api-key
+  agentFiles:
+    applyPolicy: Always
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/financial-analyst
+    readOnly:
+      - SOUL.md
+      - AGENTS.md
+      - TOOLS.md
+      - skills/
+  config:
+    mergeMode: overwrite
+  network:
+    builtinPassthroughs: []
+  restrictions:
+    pluginInstallation: false
+  mcpServers:
+    financial-data:
+      url: http://fin-data-mcp.finance.svc:9001/mcp
