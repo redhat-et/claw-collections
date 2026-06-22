@@ -3,7 +3,7 @@ kind: Claw
 metadata:
   name: hr-specialist
 spec:
-  version: "2026.6.8"
+  version: "2026.6.9"
   credentials:
     - name: anthropic-vertex
       type: gcp
