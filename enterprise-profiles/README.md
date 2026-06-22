@@ -8,17 +8,40 @@ assistants from a Git repo.
 
 ## Profiles
 
-| Profile | Role | Skill |
+| Profile | Role | Scenario |
 |---|---|---|
-| `hr-specialist` | HR policy, communications, onboarding | Onboarding checklist generator |
-| `financial-analyst` | Financial analysis, modeling, reporting | Budget variance analysis |
-| `executive-assistant` | Meeting prep, exec comms, strategic docs | Executive brief summarizer |
-| `marketing-specialist` | Campaigns, content, messaging, performance | Campaign brief, content calendar |
+| `shared-team` | General software development team assistant | A |
+| `hr-specialist` | HR policy, communications, onboarding | B |
+| `financial-analyst` | Financial analysis, modeling, reporting | B |
+| `executive-assistant` | Meeting prep, exec comms, strategic docs | B |
+| `marketing-specialist` | Campaigns, content, messaging, performance | B |
 
 ## Deployment
 
 These profiles work with both operator-managed and user-managed
 modes. Point a Claw CR at a profile directory:
+
+### Shared team (Scenario A)
+
+```yaml
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: dev-team
+  namespace: ai-dev
+spec:
+  agentFiles:
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/shared-team
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: team-anthropic
+          key: api-key
+```
 
 ### HR Specialist
 
