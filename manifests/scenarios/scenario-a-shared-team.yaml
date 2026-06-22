@@ -1,0 +1,35 @@
+# Scenario A: Shared team assistant
+#
+# A team of 5-10 developers sharing one AI assistant with shared
+# credentials and a general-purpose persona. See the full walkthrough:
+# https://github.com/redhat-et/claw-project/blob/main/docs/scenarios/scenario-a-shared-team.md
+#
+# Prerequisites (manual deploy):
+#   oc new-project ai-dev
+#   oc create secret generic team-anthropic \
+#     --from-literal=api-key='sk-ant-...' -n ai-dev
+#   oc apply -f scenario-a-shared-team.yaml -n ai-dev
+#
+# Prerequisites (GitOps via ArgoCD):
+#   Push this file to manifests/<your-directory>/ in
+#   claw-collections and create the secret in the
+#   <directory>-claw namespace. See docs/gitops-setup.md.
+---
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: dev-team
+spec:
+  version: "2026.6.8"
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: team-anthropic
+          key: api-key
+  agentFiles:
+    applyPolicy: IfMissing
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/shared-team
