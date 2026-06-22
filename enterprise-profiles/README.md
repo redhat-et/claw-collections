@@ -11,6 +11,7 @@ assistants from a Git repo.
 | Profile | Role | Scenario |
 |---|---|---|
 | `shared-team` | General software development team assistant | A |
+| `standard-user` | Enterprise developer with restricted network | C |
 | `hr-specialist` | HR policy, communications, onboarding | B |
 | `financial-analyst` | Financial analysis, modeling, reporting | B |
 | `executive-assistant` | Meeting prep, exec comms, strategic docs | B |
@@ -41,6 +42,35 @@ spec:
       secretRef:
         - name: team-anthropic
           key: api-key
+```
+
+### Standard user (Scenario C)
+
+```yaml
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: jane-doe
+  namespace: ai-users
+spec:
+  agentFiles:
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/standard-user
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: jane-anthropic-key
+          key: api-key
+    - name: internal-npm
+      type: none
+      domain: npm.corp.internal
+  network:
+    builtinPassthroughs:
+      - github.com
+      - codeload.github.com
 ```
 
 ### HR Specialist
