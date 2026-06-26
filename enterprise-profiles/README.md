@@ -16,6 +16,7 @@ assistants from a Git repo.
 | `financial-analyst` | Financial analysis, modeling, reporting | B |
 | `executive-assistant` | Meeting prep, exec comms, strategic docs | B |
 | `marketing-specialist` | Campaigns, content, messaging, performance | B |
+| `project-assistant` | Cross-repo project planning with GitHub API access | — |
 
 ## Deployment
 
@@ -160,6 +161,42 @@ spec:
         - name: shared-anthropic
           key: api-key
 ```
+
+### Project Assistant (GitHub API)
+
+```yaml
+apiVersion: claw.sandbox.redhat.com/v1alpha1
+kind: Claw
+metadata:
+  name: project-assistant
+  namespace: ai-planning
+spec:
+  agentFiles:
+    git:
+      url: https://github.com/redhat-et/claw-collections.git
+      ref: main
+      path: enterprise-profiles/project-assistant
+  credentials:
+    - name: anthropic
+      provider: anthropic
+      secretRef:
+        - name: anthropic-key
+          key: api-key
+    - name: github
+      type: bearer
+      domain: api.github.com
+      secretRef:
+        - name: github-pat
+          key: token
+      allowedPaths:
+        - /repos/
+        - /user
+```
+
+See the [GitHub-aware assistant][github-guide] walkthrough
+for PAT creation and deployment details.
+
+[github-guide]: https://github.com/redhat-et/claw-project/blob/main/docs/scenarios/github-api-assistant.md
 
 ## What happens on pod start
 
