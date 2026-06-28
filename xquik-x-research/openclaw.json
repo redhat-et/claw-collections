@@ -1,0 +1,23 @@
+{
+  "agents": {
+    "list": [
+      {
+        "id": "default",
+        "default": true,
+        "name": "Xquik X Research",
+        "workspace": "~/.openclaw/workspace"
+      }
+    ]
+  },
+  "mcp": {
+    "servers": {
+      "xquik": {
+        "url": "https://xquik.com/mcp",
+        "transport": "streamable-http",
+        "headers": {
+          "Authorization": "Bearer ${XQUIK_API_KEY}"
+        }
+      }
+    }
+  }
+}
