@@ -3,7 +3,7 @@ kind: Claw
 metadata:
   name: project-assistant
 spec:
-  version: "2026.6.10"
+  version: "2026.6.11"
   credentials:
     - name: anthropic-vertex
       type: gcp

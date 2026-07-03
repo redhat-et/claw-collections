@@ -3,7 +3,7 @@ kind: Claw
 metadata:
   name: financial-analyst
 spec:
-  version: "2026.6.9=10"
+  version: "2026.6.11"
   idle: true
   credentials:
     - name: anthropic-vertex
