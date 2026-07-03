@@ -23,6 +23,7 @@ one of two ways:
 | Collection | What it shows |
 |---|---|
 | [`software-qa-mcp`](software-qa-mcp/) | Software Q&A agent backed by an MCP server (Context7), plus a verification sub-agent and a per-workspace skill |
+| [`xquik-x-research`](xquik-x-research/) | Public X research workspace backed by Xquik's remote MCP server and a per-workspace skill |
 | [`enterprise-profiles`](enterprise-profiles/) | Per-department assistant profiles (HR, Finance, Executive) for the enterprise onboarding pattern |
 
 _New collections go here — one row per top-level directory._
