@@ -1,0 +1,13 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: github-pat
+  namespace: panni-claw
+spec:
+  encryptedData:
+    token: AgBDb420EZyJEiQsb1NVPFHNt4AibNt2xEqG59rtLqkrFpmq77v3+52XLDW9mpFoBL9eJ+N+1MPXsdlEBpGIs1jPA2Gbu4BVcNodqdQcc5dsCBgvKqjUd8RctmZ49sGKq8Qr+/0MLsWpXdg+jgOClz/s1wKrdcS5mXXLBiVvt6GiEpnrRZs7/pHIijJYwJrtct3ZiU7c+TZoK9yXOEW6yQBVSCMtDy75SiIHuenqNxA7zds/S2nMwiTaArVifaSHy7/CpyEkB+uLlgnDB6tgCy2jHpMjjrhvP74q7i+a2Di00Ft/whfQlU2UBd8qX98EsFpScFrKNIqjV0RPHvnca2ra4IIn7SZy4NR8DnyYFEeRObpw9p8PoDMOwXfBs6YlxF2Gb2BOQ33p40Fo0Gpm44j3/yc9Sk5itmGjPFI2/gPUakaJpm+9T0BNsqNACaEoHAjbqSdNBzNKY7RhTvG0R+9eQ34mSqaa5m4A8JhgFVppEV5jwIJ/VKbnSQiu++uazY6aFi4rjxoBBvF3HtDHTVXJ+FLbidhhLjUzqUK5RAXm40AodepLsoag6nHQs5qXIOIPEYHlWDD9jzK5oR+RNBuyGCYZv3VZIPWlp/+3EX6LOFZr7nWFC1Rtj1vGa8uTdN9o5OgQZ3phmFfd4OahUk6zuKDIaequ4ngQhWKuUks3DkSQOJp1wabF2bR1L7tn/S59iRu7SdJ4q6q66v4L3Gc5sraxXAJsyhi9OvezV1En2VqyW8qYVhYJ/plL0Wmh13S6DDPozstRT/zswcC9kXNJg5ioyWxrMPXcLQ7vyp3G4wX8ZIc3bIkJFj1YwGs=
+  template:
+    metadata:
+      name: github-pat
+      namespace: panni-claw

@@ -3,7 +3,8 @@ kind: Claw
 metadata:
   name: executive-assistant
 spec:
-  version: "2026.6.9"
+  version: "2026.6.10"
+  idle: true
   credentials:
     - name: anthropic-vertex
       type: gcp

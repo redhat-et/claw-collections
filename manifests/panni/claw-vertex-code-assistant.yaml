@@ -1,10 +1,9 @@
 apiVersion: claw.sandbox.redhat.com/v1alpha1
 kind: Claw
 metadata:
-  name: marketing-specialist
+  name: project-assistant
 spec:
   version: "2026.6.10"
-  idle: true
   credentials:
     - name: anthropic-vertex
       type: gcp
@@ -15,8 +14,21 @@ spec:
         project: "itpc-gcp-octo-eng-claude"
         location: "global"
       provider: anthropic
+    # GitHub API credential
+    - name: github
+      type: bearer
+      domain: api.github.com
+      secretRef:
+        - name: github-pat
+          key: token
+      allowedPaths:
+        - /repos/
+        - /user
   agentFiles:
     git:
       url: https://github.com/redhat-et/claw-collections.git
       ref: main
-      path: enterprise-profiles/marketing-specialist
+      path: enterprise-profiles/project-assistant
+    readOnly:
+      - SOUL.md
+      - TOOLS.md
