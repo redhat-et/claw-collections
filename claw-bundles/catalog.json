@@ -182,7 +182,7 @@
       "id": "project-assistant",
       "name": "Project assistant",
       "category": "operations",
-      "description": "Helps teams manage cross-repository project work with read-only GitHub API access for status reviews and issue triage.",
+      "description": "Helps teams manage cross-repository project work through status reviews and issue triage, acting as a read-only advisor.",
       "audience": "Engineering teams coordinating work across multiple GitHub repositories who need status summaries, triage support, and cross-repo analysis.",
       "principles": [
         "Be a navigator, not a driver: present information and surface patterns, but the team makes the decisions",

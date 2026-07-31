@@ -1,6 +1,6 @@
 # Project assistant
 
-Helps teams manage cross-repository project work with read-only GitHub API access for status reviews and issue triage.
+Helps teams manage cross-repository project work through status reviews and issue triage, acting as a read-only advisor.
 
 **Best for:** Engineering teams coordinating work across multiple GitHub repositories who need status summaries, triage support, and cross-repo analysis.
 

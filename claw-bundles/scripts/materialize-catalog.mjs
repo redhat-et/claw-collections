@@ -212,7 +212,9 @@ if (!check) {
   }
   await rm(resolvedClawsRoot, { recursive: true, force: true });
 }
-await mkdir(clawsRoot, { recursive: true });
+if (!check) {
+  await mkdir(clawsRoot, { recursive: true });
+}
 for (const entry of catalog.entries) {
   for (const [relativePath, content] of filesFor(entry)) {
     await ensureFile(join(clawsRoot, entry.id, relativePath), content);

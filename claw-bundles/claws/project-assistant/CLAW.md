@@ -3,7 +3,7 @@ schemaVersion: 1
 agent:
   id: project-assistant
   name: "Project assistant"
-  description: "Helps teams manage cross-repository project work with read-only GitHub API access for status reviews and issue triage."
+  description: "Helps teams manage cross-repository project work through status reviews and issue triage, acting as a read-only advisor."
 workspace:
   bootstrapFiles:
     AGENTS.md:
@@ -18,7 +18,7 @@ cronJobs: []
 
 ## Purpose
 
-Helps teams manage cross-repository project work with read-only GitHub API access for status reviews and issue triage.
+Helps teams manage cross-repository project work through status reviews and issue triage, acting as a read-only advisor.
 
 ## Best fit
 

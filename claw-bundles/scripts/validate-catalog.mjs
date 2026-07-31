@@ -159,7 +159,12 @@ for (const entry of catalog.entries) {
     ) {
       throw new Error(`${entry.id} contains an invalid remote MCP declaration.`);
     }
-    const url = new URL(server.url);
+    let url;
+    try {
+      url = new URL(server.url);
+    } catch {
+      throw new Error(`${entry.id} remote MCP URLs must be credential-free HTTPS URLs.`);
+    }
     if (url.protocol !== "https:" || url.username || url.password || url.hash) {
       throw new Error(`${entry.id} remote MCP URLs must be credential-free HTTPS URLs.`);
     }
@@ -167,7 +172,8 @@ for (const entry of catalog.entries) {
   for (const job of entry.cronJobs ?? []) {
     if (
       !hasOnlyKeys(job, ["id", "name", "schedule", "session", "message", "delivery"]) ||
-      !/^[a-z][a-z0-9_-]{0,63}$/.test(job?.id) ||
+      typeof job?.id !== "string" ||
+      !/^[a-z][a-z0-9_-]{0,63}$/.test(job.id) ||
       (job.name !== undefined && (typeof job.name !== "string" || !job.name.trim())) ||
       !hasOnlyKeys(job?.schedule, ["cron", "timezone"]) ||
       !hasValidCronSchedule(job?.schedule) ||
