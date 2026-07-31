@@ -1,0 +1,17 @@
+{
+  "name": "claw-bundles",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/materialize-catalog.mjs",
+    "check": "node scripts/materialize-catalog.mjs --check && node scripts/validate-catalog.mjs"
+  },
+  "engines": {
+    "node": ">=22.22.3"
+  },
+  "devDependencies": {
+    "croner": "^10.0.1",
+    "yaml": "2.9.0"
+  }
+}
